@@ -30,10 +30,20 @@ void ListaDinamica::agregar(int elemento){
 	(*p).siguiente=cabeza;
 	cabeza=p;
 	}
-//Nodo *ListaDinamica::buscar(int elemento)
-//	{
-		
-	//}
+Nodo *ListaDinamica::buscar(int elemento)
+	{
+		Nodo *p=cabeza;
+				while(p!=NULL)
+		{
+			if(p->elemento==elemento)
+			{
+				
+				return p;
+			}
+			p=p->siguiente;
+		}
+		return p;
+	}
 void ListaDinamica::mostrar()
 	{
 		Nodo *p=cabeza;
@@ -74,6 +84,12 @@ int main(){
 			case 'm':
 			case 'M':cout<<"\n Los elementos almacenados ; \n";
 					lista.mostrar();
+					break;
+			case 'b':
+			case 'B':cout<<"Ingrese el elemento a buscar \n";
+					cin>>elemento;
+					cout<<"El elemento se encuentra en "<<lista.buscar(elemento);
+					
 					break;
 					
 		}
