@@ -6,6 +6,7 @@ struct Nodo{
 	};
 class ListaDinamica{
 	private:
+	
 	Nodo *cabeza;
 	
 	
@@ -14,11 +15,12 @@ class ListaDinamica{
 		{
 		cabeza=NULL;
 		}
+		
 	void agregar(int);
 	void mostrar();
 	int eliminar();
 	void eliminar(int);
-	Nodo buscar(int);
+	Nodo *buscar(int);
 	void ordenar();
 	};
 	
@@ -28,7 +30,11 @@ void ListaDinamica::agregar(int elemento){
 	(*p).siguiente=cabeza;
 	cabeza=p;
 	}
-void mostrar()
+//Nodo *ListaDinamica::buscar(int elemento)
+//	{
+		
+	//}
+void ListaDinamica::mostrar()
 	{
 		Nodo *p=cabeza;
 		while(p!=NULL)
@@ -71,7 +77,7 @@ int main(){
 					break;
 					
 		}
-	}
+	}while(opcion!='s' && opcion!='S');
 	lista.agregar(20);
 	cout<<"Elementos almacenados :\n";
 	lista.mostrar();
