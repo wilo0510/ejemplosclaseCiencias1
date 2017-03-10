@@ -142,7 +142,7 @@ char menu(){
 	return opcion;			
 }
 int main(){
-	Cola lista;
+	ListaDoble lista;
 	char opcion;
 	int elemento;
 	do{opcion=menu();
@@ -176,7 +176,7 @@ int main(){
 			case 'E':
 				if(!lista.vacia())
 				{
-					elemento=lista.eliminar();
+					
 					cout<<"Eliminar ultimo elemento.El elemento eliminado es: "<<lista.eliminar();		
 				}
 				else
