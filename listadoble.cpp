@@ -8,6 +8,7 @@ struct Nodo{
 class ListaDoble{
 	protected:
 	Nodo *cabeza;
+	Nodo *fin;
 	public:
 	ListaDoble(){
 		cabeza=NULL;
@@ -33,7 +34,7 @@ void ListaDoble::agregar(int elemento){
 		fin=p;
 	cabeza=p;
 }
-Nodo *ListaDinamica::buscar(int elemento){
+Nodo *ListaDoble::buscar(int elemento){
 	Nodo *p=cabeza;
 	while(p!=NULL){
 		if(p->elemento==elemento){
@@ -51,21 +52,24 @@ void ListaDoble::mostrar(){
 	}		
 }
 int ListaDoble::eliminar(){
-	int info;
-	Nodo *p=cabeza;
-	Nodo *q=cabeza->siguiente;
-	while(q->siguiente!=NULL){
-		p=q;
-		q=q->siguiente;
+	int elemento;
+	Nodo *p=fin,*q;
+	q=p->ant;
+	elemento=p->elemento;
+	if(cabeza==p){
+		cabeza=NULL;
 	}
-	p->siguiente=NULL;
-	info = q->elemento;
-	delete q;
-	return info;
+	else
+	{
+		q->siguiente=p->siguiente;
+	}
+	fin=p->ant;
+	delete p;
+	return elemento;
 }
-void ListaDinamica::eliminar(int elemento){
+void ListaDoble::eliminar(int elemento){
 	Nodo *p=cabeza;
-	Nodo *temp;
+	//Nodo *temp;
 	if(p->elemento==elemento){
 		cabeza = p->siguiente;
 		delete p;
@@ -73,10 +77,10 @@ void ListaDinamica::eliminar(int elemento){
 		//while(p)
 	}
 }
-bool ListaDinamica::vacia(){
+bool ListaDoble::vacia(){
 	return cabeza==NULL;
 }
-class Cola:public ListaDinamica{
+class Cola:public ListaDoble{
 	private:
 		Nodo * fin;
 	public:
@@ -106,7 +110,7 @@ int Cola::eliminar()
 	delete p;
 	return elemento;
 }
-class Pila:public ListaDinamica
+class Pila:public ListaDoble
 {	
 
 	public:
