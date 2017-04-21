@@ -26,32 +26,35 @@ class ArbolBinario{
 class ArbolBinarioOrdenado: public ArbolBinario{
 		public:
 			ArbolBinarioOrdenado();
-			Nodo *agregar(int);
+			Nodo *agregar(Nodo*,int);
 			Nodo *buscar(int);
-			eliminarElemento(int)
+			eliminarElemento(int);
 };
-ArbolBinarioOrdenado::ArbolBinario(){
+ArbolBinarioOrdenado::ArbolBinarioOrdenado(){
 	raiz=NULL;
 }
-ArbolBinarioOrdenado::agregar(int elemento){
-	Nodo *R=raiz,*s;//variable para recorrer el arbol
-	while(R){
-		s=R;
-		if(elemento<R->elemento)
-			R=R->izq;
-		else
-			R=R->der;
-	}
-	R=new Nodo;	
-	R->elemento=elemento;
-	R->der=R->izq=NULL;
+Nodo *ArbolBinarioOrdenado::agregar(Nodo *raiz,int elemento){
+	
+	Nodo *p;
 	if(raiz){
-		if(elemento<s->elemento)
-			s->izq=R;
-		else
-			s->der=R;
-	return raiz;
+		if(elemento<raiz->elemento){
+			raiz->izq=agregar(raiz->izq,elemento);
+		}
+		else{
+			raiz->der=agregar(raiz->der,elemento);
+		}
 	}
+	else
+	{
+		p=new Nodo;
+		raiz=p;
+		raiz->elemento=elemento;
+		raiz->der=NULL;
+		raiz->izq=NULL;
+	}
+	return raiz;
+	
+
 	
 }
 ArbolBinario::ArbolBinario(){
@@ -84,7 +87,7 @@ Nodo *ArbolBinario::agregar(Nodo *raiz,int elemento){
 	return raiz;
 	
 }
-ArbolBinario::eliminar(Nodo *raiz){
+int ArbolBinario::eliminar(Nodo *raiz){
 	Nodo *p=raiz;
 	Nodo *q;
 	int eliminado=p->elemento;
@@ -139,9 +142,18 @@ void ArbolBinario::mostrarInorden(Nodo *raiz){
 		mostrarInorden(raiz->der);
 	}	
 }
-char menu(){
+char menuPrincipal(){
 	char opcion;
 	cout<<"\n MENU \n";
+	cout<<"Arbol (B)inario \n";
+	cout<<"Arbol Binario (O)rdenado \n";
+	cout<<"AV(L) \n";
+	cin>>opcion;
+	return opcion;
+	
+}
+char menu(){
+	char opcion;
 	cout<<"(A)gregar \n";
 	cout<<"(E)liminar \n";
 	cout<<"(M)ostrar \n";
@@ -156,8 +168,9 @@ char menu(){
 
 
 int main(){
-	ArbolBinario arbol;
+	ArbolBinarioOrdenado arbol;
 	Nodo *raiz=arbol.getRaiz();
+	
 	char opcion;
 	int elemento;
 	do{
@@ -182,7 +195,7 @@ int main(){
 				cout<<"Arbol preorden \n";
 				arbol.mostrarPreorden(raiz);
 				cout<<"\n";
-				cout<<"Arbol posorden \n";
+				cout<<"Arbol postorden \n";
 				arbol.mostrarPosorden(raiz);
 				cout<<"\n";
 				break;
